@@ -1,0 +1,84 @@
+<html>
+
+<head>
+<style>
+
+#pubcloud{
+	position: relative;
+	width: 300px;
+	height: 300px;
+	border: 2pt solid gray;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.tag{
+	font-family: Rockwell;
+	font-weight: bold;
+	position: absolute;
+	text-decoration: none;
+	color: black;
+}
+
+a.tag:visited{
+	color: black;
+}
+
+a.tag:hover{
+	color: #000099;
+}
+
+#huck{
+	font-size: 2em;
+	top: 40%;
+	left: 35%;
+}
+
+#huckframe{
+	display: none;
+	background: #FFF;
+}
+
+#bid{
+	font-size: 3em;
+	top: 20%;
+	left: 15%;
+}
+
+#pillage{
+	font-size: 4em;
+	top: 50%;
+	left: 15%;
+}
+
+#burn{
+	font-size: 5em;
+	top: -20px;
+	left: 25%;
+}
+
+</style>
+
+<script>
+function showframe(){
+	document.getElementById("huckframe").style.display = "block";
+}
+
+function hideframe(){
+	document.getElementById("huckframe").style.display = "none";
+}
+</script>
+
+</head>
+
+<body>
+<div id=pubcloud>
+<a id=huck class=tag onmouseover="showframe()" onmouseout="hideframe()" href=""> Huck! <iframe id=huckframe src="tag1-iframe.html"><p>Frames are not supported by your browser.</p></iframe></a>
+<a id=bid class=tag href="">Bid!</a>
+<a id=pillage class=tag href="">Pillage!</a>
+<a id=burn class=tag href="">Burn!</a>
+</div>
+
+</body>
+
+</html>
