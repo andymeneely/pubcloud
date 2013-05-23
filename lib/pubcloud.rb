@@ -1,7 +1,7 @@
 require 'tokenizer'
 require 'fast-stemmer'
 require 'pubcloud/token'
-require 'set'
+require 'active_support/inflector'
 
 class Pubcloud
   attr_reader :tokens
@@ -23,7 +23,7 @@ class Pubcloud
     tokens = Hash.new
     tokenizer = Tokenizer::Tokenizer.new
 	tokenizer.tokenize(@text).each{|token_str|
-	  token_str.downcase!
+	  token_str = token_str.downcase.singularize
 	  token = Token.new(token_str)
 	  if tokens[token].nil?
 	    tokens[token] = token # Yes, a hash that maps to itself...
