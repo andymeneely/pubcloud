@@ -32,6 +32,10 @@ class Token
 	largest_name
   end
   
+  def count
+	@freq.inject(0){|total,entry| total+=entry[1] }
+  end
+  
   def eql?(other)
     @stem.eql? other.stem
   end

@@ -48,4 +48,14 @@ class TestToken < Test::Unit::TestCase
     assert_equal('comput'.hash, token.hash)
   end
   
+  def test_count
+	token = Token.new('computing')
+    assert_equal(1, token.count)
+	token.add! 'computing'
+	token.add! 'computers'
+	token.add! 'computer'
+	token.add! 'computer'
+	assert_equal(5, token.count)
+  end
+  
 end
