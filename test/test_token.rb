@@ -37,4 +37,15 @@ class TestToken < Test::Unit::TestCase
 	end
   end
   
+  def test_eql?
+    token1 = Token.new('computing')
+	token2 = Token.new('computer')
+    assert(token1.eql? token2)
+  end
+  
+  def test_hash
+    token = Token.new('computing')
+    assert_equal('comput'.hash, token.hash)
+  end
+  
 end

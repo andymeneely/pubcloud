@@ -31,4 +31,12 @@ class Token
 	end
 	largest_name
   end
+  
+  def eql?(other)
+    @stem.eql? other.stem
+  end
+  
+  def hash
+    @stem.hash
+  end
 end
