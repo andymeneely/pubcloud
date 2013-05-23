@@ -15,11 +15,11 @@ class Pubcloud
   def count_frequency
     @freq = Hash.new
     tokenizer = Tokenizer::Tokenizer.new
-	tokenizer.tokenize(@text).each{|token|
-	  token.downcase!
-	  stem = token.stem
+	tokenizer.tokenize(@text).each{|token_str|
+	  token_str.downcase!
+	  stem = token_str.stem
 	  @freq[stem] ||= Array.new
-	  @freq[stem] << token
+	  @freq[stem] << token_str
 	}
 	@freq
   end
