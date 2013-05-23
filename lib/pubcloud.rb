@@ -23,5 +23,4 @@ class Pubcloud
 	}
 	@freq
   end
-
- end
+end
