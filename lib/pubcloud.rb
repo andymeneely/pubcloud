@@ -22,7 +22,7 @@ class Pubcloud
   def count_frequency
     tokens = Hash.new
     tokenizer = Tokenizer::Tokenizer.new
-	tokenizer.tokenize(@text).each{|token_str|
+	tokenizer.tokenize(@text).each do |token_str|
 	  token_str = token_str.downcase.singularize
 	  token = Token.new(token_str)
 	  if tokens[token].nil?
@@ -30,7 +30,7 @@ class Pubcloud
 	  else
 	    tokens[token].add! token_str
 	  end
-	}
+	end
 	tokens
   end
 end
