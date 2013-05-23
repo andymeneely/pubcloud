@@ -2,8 +2,7 @@ require 'helper'
 require 'pubcloud'
 
 class TestPubcloud < Test::Unit::TestCase
-  @test_order = :defined
-
+  
   def test_00_simple
 	exp ={
 	  "dark" => ["dark"],
