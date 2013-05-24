@@ -2,31 +2,28 @@ require 'pubcloud/spiral_iterator'
 
 class TestSpiralIterator < Test::Unit::TestCase
 
-  def _test_first_is_center
-	itr = SpiralIterator.new({:x=>5,:y=>5}, maxSize=10, numSteps=1)
-	times = 0
-	itr.each do |x,y|
-		assert_equal(5, x)
-		assert_equal(5, y)
-		times = times + 1
-	end
-	assert_equal(1, times, "Iterator went more than one time")
-  end
+  # def test_first_is_center
+	# itr = SpiralIterator.new({:row=>5,:col=>5}, maxSize=10, numSteps=1)
+	# times = 0
+	# itr.each do |row,col|
+		# assert_equal(5, row)
+		# assert_equal(5, col)
+		# times = times + 1
+	# end
+	# assert_equal(1, times, "Iterator went more than one time")
+  # end
 
-  def test_a_few_more
-	itr = SpiralIterator.new({:x=>5,:y=>5}, maxSize=10, numSteps=6)
-	times = 0
-	act_x = []
-	act_y = []
-	itr.each do |x,y|
-	  act_x << x
-	  act_y << y
-	  times = times + 1
+  def test_a_spiral
+	itr = SpiralIterator.new(width=3, center={:row=>5,:col=>5})
+	act_row = []
+	act_col = []
+	itr.each do |row,col|
+	  act_row << row
+	  act_col << col
 	end
-	puts "actual x: #{act_x}\nactual y: #{act_y}"
-	assert_equal([5,6,4,2,2,6], act_x)
-	assert_equal([5,6,7,5,2,0], act_y)
-	assert_equal(6, times)
+	#puts "actual x: #{act_row}\nactual y: #{act_col}"
+	assert_equal([5,5,4,4,4,5,6,6,6], act_row)
+	assert_equal([5,6,6,5,4,4,4,5,6], act_col)
   end
   
 end

@@ -1,28 +1,51 @@
 
 class SpiralIterator
 
-  def initialize(center={:x=>0, :y=>0}, max_size=10, num_steps=5, squashdown = 1.0, round = :true)
+  def initialize(width=10,center={:row=>0, :col=>0})
+	@width = width
     @center = center
-	@scale = max_size / num_steps
-	@num_steps = num_steps
-	@squashdown = squashdown
-	@round = round
   end
 
   def each
     return :false unless block_given?
-	
-	slast_theta = 0.0
-	(0..(@num_steps-1)).each do |i|
-	  radius = i * @scale
-	  theta =  radius;
-	  puts "i: #{i}, radius: #{radius}, theta: #{theta}, center: #{@center}, squashdown: #{@squashdown}, scale: #{@scale}"
-	  x = @squashdown * radius * Math.cos(theta) + @center[:x]
-	  y = radius * Math.sin(theta) + @center[:y]
-	  x = x.round if @round
-	  y = y.round if @round
-	  yield(x,y)
-	end
-  end
-
+    row = @center[:row]
+    col = @center[:col]
+    direction = distance = 1
+    yield(row,col)
+    while (distance <= @width/2)
+        # Move the cols right
+        begin 
+          col+=direction
+          yield(row,col)
+        end while( (col-@center[:col]).abs < distance)
+        
+        # Move rows up
+        direction *= -1
+        begin 
+          row+=direction
+          yield(row,col)
+        end while( (row-@center[:row]).abs < distance)
+        
+        # Move cols left
+        begin
+          col+=direction
+          yield(row,col)
+        end while( (col-@center[:col]).abs < distance)
+        
+        # Move rows down
+        direction *=-1
+        begin
+          row+=direction
+          yield(row,col)
+        end while( (row-@center[:row]).abs < distance)
+        
+        # Move the cols right
+        begin 
+          col+=direction
+          yield(row,col)
+        end while( (col-@center[:col]).abs < distance)
+        
+        distance += 1
+    end
+  end    
 end
