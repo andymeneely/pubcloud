@@ -33,7 +33,7 @@ class SpiralIterator
         end while( (col-@center[:col]).abs < distance)
         
         # Move rows down
-        direction *=-1
+        direction *= -1
         begin
           row+=direction
           yield(row,col)

@@ -12,18 +12,28 @@ class TestSpiralIterator < Test::Unit::TestCase
 	# end
 	# assert_equal(1, times, "Iterator went more than one time")
   # end
-
-  def test_a_spiral
-	itr = SpiralIterator.new(width=3, center={:row=>5,:col=>5})
-	act_row = []
-	act_col = []
+  def run_iterator(width, center)
+    itr = SpiralIterator.new(width=width, center=center)
+	act = Hash.new
+    act[:row] = []
+	act[:col] = []
 	itr.each do |row,col|
-	  act_row << row
-	  act_col << col
+	  act[:row] << row
+	  act[:col] << col
 	end
-	#puts "actual x: #{act_row}\nactual y: #{act_col}"
-	assert_equal([5,5,4,4,4,5,6,6,6], act_row)
-	assert_equal([5,6,6,5,4,4,4,5,6], act_col)
+    return act
+  end 
+   
+  def test_a_spiral
+	act = run_iterator(width=3, {:row=>5,:col=>5})
+	assert_equal([5,5,4,4,4,5,6,6,6], act[:row])
+	assert_equal([5,6,6,5,4,4,4,5,6], act[:col])
   end
-  
+
+
+  def test_bigger_spiral
+    act = run_iterator(width=5, {:row=>5,:col=>5})
+	assert_equal([5,5,4,4,4,5,6,6,6,6,5,4,3,3,3,3,3,4,5,6,7,7,7,7,7], act[:row])
+	assert_equal([5,6,6,5,4,4,4,5,6,7,7,7,7,6,5,4,3,3,3,3,3,4,5,6,7], act[:col])
+  end   
 end
