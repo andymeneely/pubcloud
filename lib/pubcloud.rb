@@ -12,25 +12,26 @@ class Pubcloud
   end
   
   def frequencies
-	@tokens ||= count_frequency
-	table = Hash.new
-	@tokens.each { |token,flag| table[token.name] = token.count}
-	table
+    @tokens ||= count_frequency
+    table = Hash.new
+    @tokens.each { |token,flag| table[token.name] = token.count}
+    table
   end
   
   private 
   def count_frequency
     tokens = Hash.new
     tokenizer = Tokenizer::Tokenizer.new
-	tokenizer.tokenize(@text).each do |token_str|
-	  token_str = token_str.downcase.singularize
-	  token = Token.new(token_str)
-	  if tokens[token].nil?
-	    tokens[token] = token # Yes, a hash that maps to itself...
-	  else
-	    tokens[token].add! token_str
-	  end
-	end
-	tokens
+    tokenizer.tokenize(@text).each do |token_str|
+      token_str = token_str.downcase.singularize
+      token = Token.new(token_str)
+      if tokens[token].nil?
+        tokens[token] = token # Yes, a hash that maps to itself...
+      else
+        tokens[token].add! token_str
+      end
+    end
+    tokens
   end
+  
 end
