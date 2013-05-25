@@ -9,7 +9,7 @@ class GridBlock
   end
   
   def rowspan
-    token.name.length * font_scale * font_size
+    @token.name.length * @font_scale * @font_size
   end
   
   def colspan
