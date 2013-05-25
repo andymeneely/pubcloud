@@ -27,8 +27,8 @@ class Token
       elsif count==largest && token.size < largest_name.size
         largest_name = token
       end
-      largest_name
     end
+    largest_name
   end
   
   def count
