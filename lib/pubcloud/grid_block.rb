@@ -8,11 +8,11 @@ class GridBlock
     @font_scale = 1.0
   end
   
-  def rowspan
+  def colspan
     @token.name.length * @font_scale * @font_size
   end
   
-  def colspan
+  def rowspan
     @font_scale * @font_size
   end
 end
