@@ -18,11 +18,25 @@ class TestLayoutGrid < Test::Unit::TestCase
     plum = GridBlock.new(Token.new("plum"), font_size=1.0)
     assert_equal(4, plum.colspan)
     assert_equal(1, plum.rowspan)
-    grid.add!(plum,0,0)
+    ret = grid.add!(plum,0,0)
 
     exp = "<table>#{tr("<td colspan=4 rowspan=1>plum</td><td>&nbsp;</td>")}#{tr(td("&nbsp;")*5)}</table>"
     assert_equal(exp, grid.to_html)
+    assert_equal(:ok, ret)
   end
+  
+  def test_add_collide!
+    grid = LayoutGrid.new(width=5, height=2)
+    plum = GridBlock.new(Token.new("plum"), font_size=1.0)
+    a = GridBlock.new(Token.new("a"),font_size=1.0)
+    ret = grid.add!(plum,0,0)
+    assert_equal(:ok, ret, "Unexpected collision")
+    
+    ret = grid.add!(a,0,3)
+    assert_equal(:collision, ret, "Should have been a collision!")
+  end
+  
+  # TODO Add a test for adding out of bounds, assert_equal(:out_of_bounds)
   
   def tr(str)
     "<tr>#{str}</tr>"
