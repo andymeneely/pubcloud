@@ -25,6 +25,14 @@ class TestLayoutGrid < Test::Unit::TestCase
     assert_equal(:ok, ret)
   end
   
+  def test_add_fills_up
+    grid = LayoutGrid.new(width=2, height=1)
+    a = GridBlock.new(Token.new("ab"),font_size=1.0)
+    ret = grid.add!(a, 0,0)
+    assert_equal(:ok, ret)
+    assert_equal("<table>#{tr("<td colspan=2 rowspan=1>ab</td>")}</table>", grid.to_html)
+  end
+  
   def test_add_collide!
     grid = LayoutGrid.new(width=5, height=2)
     plum = GridBlock.new(Token.new("plum"), font_size=1.0)
@@ -36,7 +44,25 @@ class TestLayoutGrid < Test::Unit::TestCase
     assert_equal(:collision, ret, "Should have been a collision!")
   end
   
-  # TODO Add a test for adding out of bounds, assert_equal(:out_of_bounds)
+  def test_add_out_of_bounds_negative
+    grid = LayoutGrid.new(width=2, height=2)
+    a = GridBlock.new(Token.new("a"),font_size=1.0)
+    ret = grid.add!(a, -1,0)
+    assert_equal(:out_of_bounds, ret, "Something was accidentally placed...")
+    assert_equal("<table>#{tr(td("&nbsp;")*2)*2}</table>", grid.to_html)
+    
+    ret = grid.add!(a, 0,-1)
+    assert_equal(:out_of_bounds, ret, "Something was accidentally placed...")
+    assert_equal("<table>#{tr(td("&nbsp;")*2)*2}</table>", grid.to_html)
+  end
+  
+  def test_add_out_of_bounds_too_big
+    grid = LayoutGrid.new(width=2, height=2)
+    a = GridBlock.new(Token.new("abc"),font_size=1.0)
+    ret = grid.add!(a, 0,0)
+    assert_equal(:out_of_bounds, ret, "Something was accidentally placed...")
+    assert_equal("<table>#{tr(td("&nbsp;")*2)*2}</table>", grid.to_html)
+  end
   
   def tr(str)
     "<tr>#{str}</tr>"
