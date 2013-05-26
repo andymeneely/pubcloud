@@ -33,6 +33,14 @@ class TestLayoutGrid < Test::Unit::TestCase
     assert_equal("<table>#{tr("<td colspan=2 rowspan=1>ab</td>")}</table>", grid.to_html)
   end
   
+  def test_add_fills_up_rows_too
+    grid = LayoutGrid.new(width=4, height=2)
+    a = GridBlock.new(Token.new("ab"),font_size=2.0)
+    ret = grid.add!(a, 0,0)
+    assert_equal(:ok, ret)
+    assert_equal("<table>#{tr("<td colspan=4 rowspan=2>ab</td>")}#{tr("")}</table>", grid.to_html)
+  end
+  
   def test_add_collide!
     grid = LayoutGrid.new(width=5, height=2)
     plum = GridBlock.new(Token.new("plum"), font_size=1.0)
