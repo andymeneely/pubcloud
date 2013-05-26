@@ -20,7 +20,7 @@ class TestLayoutGrid < Test::Unit::TestCase
     assert_equal(1, plum.rowspan)
     grid.add!(plum,0,0)
 
-    exp = "<table>#{tr("<td colspan=4>plum</td>")}#{td("&nbsp;")}#{tr(td("&nbsp;")*5)}</table>"
+    exp = "<table>#{tr("<td colspan=4 rowspan=1>plum</td><td>&nbsp;</td>")}#{tr(td("&nbsp;")*5)}</table>"
     assert_equal(exp, grid.to_html)
   end
   

@@ -42,4 +42,8 @@ class Token
   def hash
     @stem.hash
   end
+  
+  def to_s
+    name
+  end
 end
