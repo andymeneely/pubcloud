@@ -9,7 +9,7 @@ class Pubcloud
   def initialize(text)
     raise unless text.is_a? String
     @text=text
-  end
+  end  
   
   def frequencies
     @tokens ||= count_frequency
