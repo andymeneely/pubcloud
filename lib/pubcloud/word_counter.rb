@@ -10,19 +10,27 @@ class WordCounter
     raise unless text.is_a? String
     @text=text
   end  
-  
-  def frequencies
+
+  def frequencies(count_min=1)
     @tokens ||= count_frequency
+
     table = Hash.new
     @tokens.each { |token,flag| table[token.name] = token.count}
-    table
-  end
-  
-def token_ok?(t)
-  t.length > 0 && (t =~ /\A\w*\z/)
-                        
-end
 
+    table.sort do |a,b|
+      if((a[1] <=> b[1]) == 0)
+        b[0] <=> a[0] # Sort by token length, if tied
+      else 
+        a[1] <=> b[1] # Sort by token count
+      end 
+    end
+
+    table.keep_if{|token, count| count >= count_min}
+  end
+
+  def token_ok?(t)
+    t.length > 0 && (t =~ /\A\w*\z/)
+  end
 
   private 
   def count_frequency
@@ -40,5 +48,5 @@ end
     end
     tokens
   end
-  
+
 end

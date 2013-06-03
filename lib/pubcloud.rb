@@ -12,7 +12,7 @@ module Pubcloud
 
     def freqs
         file = File.open(@opts[:file]); text = file.read; file.close
-        WordCounter.new(text).frequencies()
+        WordCounter.new(text).frequencies(@opts[:min])
     end
   end
 
@@ -20,12 +20,12 @@ module Pubcloud
     opts = Trollop::options do
       version "#{VERSION} (c) 2013 Andy Meneely"
       banner "Make a word cloud of your publications."
-      opt :words, "Number of words to display", :default => 20
+      opt :min, "Minimum number of times a word must occur to be included", :default => 5
       opt :file, "The source file in plain text", :type => String
     end
 
     Trollop::die "No source file given. Use --file" unless opts[:file_given]
-    Trollop::die :words, "must be at least 1" if opts[:words] < 1
+    Trollop::die :min, "must be at least 1" if opts[:min] < 1
     Trollop::die :file, "must exist" unless File.exist?(opts[:file])
 
     pc = Pubcloud.new(opts)
