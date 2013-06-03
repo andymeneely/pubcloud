@@ -9,10 +9,11 @@ class WordCounter
   def initialize(text)
     raise unless text.is_a? String
     @text=text
+    
   end  
 
-  def frequencies(count_min=1)
-    @tokens ||= count_frequency
+  def frequencies(count_min=1, use_ignores=false)
+    @tokens ||= count_frequency(use_ignores)
 
     table = Hash.new
     @tokens.each { |token,flag| table[token.name] = token.count}
@@ -33,7 +34,7 @@ class WordCounter
   end
 
   private 
-  def count_frequency
+  def count_frequency(use_ignores)
     tokens = Hash.new
     tokenizer = Tokenizer::Tokenizer.new
     tokenizer.tokenize(@text).each do |token_str|
