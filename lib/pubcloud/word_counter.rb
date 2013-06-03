@@ -1,6 +1,7 @@
 require 'tokenizer'
 require 'fast-stemmer'
 require 'pubcloud/token'
+require 'pubcloud/ignored_list'
 require 'active_support/inflector'
 
 class WordCounter 
@@ -9,7 +10,7 @@ class WordCounter
   def initialize(text)
     raise unless text.is_a? String
     @text=text
-    
+    @list = IgnoredList.new
   end  
 
   def frequencies(count_min=1, use_ignores=false)
@@ -40,6 +41,7 @@ class WordCounter
     tokenizer.tokenize(@text).each do |token_str|
       token_str = token_str.strip.downcase.singularize
       next unless token_ok? token_str
+      next if use_ignores && (@list.ignore? token_str)
       token = Token.new(token_str)
       if tokens[token].nil?
         tokens[token] = token # Yes, a hash that maps to itself...

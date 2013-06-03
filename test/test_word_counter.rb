@@ -53,7 +53,7 @@ class TestWordCounter < Test::Unit::TestCase
     assert_equal(exp, WordCounter.new('c d e b b a a a').frequencies(2))
   end
 
-   def test_word_limit_sorting
+  def test_word_limit_sorting
     exp = {
       "aaa" => 2,
       "bb" => 2,
@@ -61,14 +61,21 @@ class TestWordCounter < Test::Unit::TestCase
     }
     assert_equal(exp, WordCounter.new('c bb aaa bb aaa').frequencies)
   end
-   
-   def test_word_limit_sorting_other_way
+
+  def test_word_limit_sorting_other_way
     exp = {
       "aaa" => 2,
       "bb" => 2,
       "c" => 1
     }
     assert_equal(exp, WordCounter.new('c aaa aaa bb bb').frequencies)
+  end
+
+  def test_ignored_word
+    exp = {
+      "textbook" => 1
+    }
+    assert_equal(exp, WordCounter.new('a textbook').frequencies(1, true))
   end
 
 end
