@@ -12,7 +12,7 @@ module Pubcloud
 
     def freqs
         file = File.open(@opts[:file]); text = file.read; file.close
-        WordCounter.new(text).frequencies(@opts[:words])
+        WordCounter.new(text).frequencies()
     end
   end
 
