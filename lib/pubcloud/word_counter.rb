@@ -18,12 +18,19 @@ class WordCounter
     table
   end
   
+def token_ok?(t)
+  t.length > 0 && (t =~ /\A\w*\z/)
+                        
+end
+
+
   private 
   def count_frequency
     tokens = Hash.new
     tokenizer = Tokenizer::Tokenizer.new
     tokenizer.tokenize(@text).each do |token_str|
-      token_str = token_str.downcase.singularize
+      token_str = token_str.strip.downcase.singularize
+      next unless token_ok? token_str
       token = Token.new(token_str)
       if tokens[token].nil?
         tokens[token] = token # Yes, a hash that maps to itself...
