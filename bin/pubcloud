@@ -8,5 +8,4 @@ rescue LoadError
   require 'pubcloud'
 end
 
-puts "Done!"
-
+Pubcloud.init_via_cli
