@@ -1,7 +1,7 @@
 require 'helper'
-require 'pubcloud'
+require 'pubcloud/word_counter'
 
-class TestPubcloud < Test::Unit::TestCase
+class TestWordCounter < Test::Unit::TestCase
   
   def test_00_simple
 	exp ={
@@ -9,7 +9,7 @@ class TestPubcloud < Test::Unit::TestCase
 	  "and" => 1,
 	  "stormy" => 1
 	}
-    assert_equal(exp, Pubcloud.new('dark and stormy').frequencies)
+    assert_equal(exp, WordCounter.new('dark and stormy').frequencies)
   end
   
   def test_counts
@@ -18,7 +18,7 @@ class TestPubcloud < Test::Unit::TestCase
 	  "redundancy" => 1,
 	  "of" => 1
 	}
-    assert_equal(exp, Pubcloud.new('Department of Redundancy Department').frequencies)
+    assert_equal(exp, WordCounter.new('Department of Redundancy Department').frequencies)
   end
   
   def test_smaller_tiebreaker
@@ -27,7 +27,7 @@ class TestPubcloud < Test::Unit::TestCase
 	  "compute" => 2,
 	  "moose" => 1
 	}
-    assert_equal(exp, Pubcloud.new('compute computer Mice mice moose').frequencies)
+    assert_equal(exp, WordCounter.new('compute computer Mice mice moose').frequencies)
   end 
   
   def test_smaller_tiebreaker_singularize
@@ -35,6 +35,6 @@ class TestPubcloud < Test::Unit::TestCase
 	  "mouse" => 2,
 	  "moose" => 1
 	}
-    assert_equal(exp, Pubcloud.new('Mouse mice moose').frequencies)
+    assert_equal(exp, WordCounter.new('Mouse mice moose').frequencies)
   end 
 end
