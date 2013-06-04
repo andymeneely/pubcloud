@@ -78,4 +78,11 @@ class TestWordCounter < Test::Unit::TestCase
     assert_equal(exp, WordCounter.new('a textbook').frequencies(1, true))
   end
 
+  def test_ignored_word_2
+    exp = {
+      'blah' => 2
+    }
+    assert_equal(exp, WordCounter.new('and and and blah blah').frequencies(1,true))
+  end
+
 end
