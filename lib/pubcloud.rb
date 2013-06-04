@@ -20,7 +20,7 @@ module Pubcloud
     opts = Trollop::options do
       version "#{VERSION} (c) 2013 Andy Meneely"
       banner "Make a word cloud of your publications."
-      opt :min, "Minimum number of times a word must occur to be included", :default => 5
+      opt :min, "Minimum number of times a word must occur to be included", :default => 1
       opt :file, "The source file in plain text", :type => String
     end
 
