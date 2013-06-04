@@ -85,4 +85,10 @@ class TestWordCounter < Test::Unit::TestCase
     assert_equal(exp, WordCounter.new('and and and blah blah').frequencies(1,true))
   end
 
+  def test_this_inflector_exception
+    exp = {
+      'this' => 2
+    }
+    assert_equal(exp, WordCounter.new('this this').frequencies(1,false))
+  end
 end

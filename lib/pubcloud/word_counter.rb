@@ -11,11 +11,11 @@ class WordCounter
     raise unless text.is_a? String
     @text=text
     @list = IgnoredList.new
+    inflector_irregulars
   end  
 
   def frequencies(count_min=1, use_ignores=false)
     @tokens ||= count_frequency(use_ignores)
-
     table = Hash.new
     @tokens.each { |token,flag| table[token.name] = token.count}
 
@@ -50,6 +50,12 @@ class WordCounter
       end
     end
     tokens
+  end
+
+  def inflector_irregulars
+    ActiveSupport::Inflector.inflections do |inflect|
+      inflect.uncountable 'this'
+    end
   end
 
 end
