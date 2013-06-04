@@ -1,4 +1,4 @@
-# rcov generated
+# simplecov and rcov generated
 coverage
 coverage.data
 
@@ -40,7 +40,7 @@ pkg
 #.\#*
 
 # For vim:
-#*.swp
+*.swp
 
 # For redcar:
 #.redcar
