@@ -1,0 +1,58 @@
+# Font size table
+# Assume 1em in Firefox 21
+# See eg/font-calibration.html for how I got this
+font:
+  name: Rockwell
+  a: 
+    width: 12.4
+  b: 
+    width: 13.3 
+  c: 
+    width: 12.0
+  d: 
+    width: 13.3
+  e: 
+    width: 12.2
+  f: 
+    width: 7.6
+  g: 
+    width: 13.3
+  h: 
+    width: 13.3
+  i: 
+    width: 7.6
+  j: 
+    width: 7.6
+  k: 
+    width: 13.8
+  l: 
+    width: 7.6
+  m: 
+    width: 21.1
+  n: 
+    width: 13.3
+  o: 
+    width: 12.2
+  p: 
+    width: 13.3
+  q: 
+    width: 13.3
+  r: 
+    width: 9.6
+  s: 
+    width: 10.9
+  t: 
+    width: 7.3
+  u: 
+    width: 13.3
+  v: 
+    width: 12.2
+  w: 
+    width: 17.4
+  x: 
+    width: 12.0
+  y: 
+    width: 12.7
+  z: 
+    width: 11.3
+   
