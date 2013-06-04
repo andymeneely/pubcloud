@@ -12,7 +12,7 @@ module Pubcloud
 
     def freqs
         file = File.open(@opts[:file]); text = file.read; file.close
-        WordCounter.new(text).frequencies(@opts[:min])
+        WordCounter.new(text).frequencies(@opts[:min],@opts[:use_ignores])
     end
   end
 
@@ -21,6 +21,7 @@ module Pubcloud
       version "#{VERSION} (c) 2013 Andy Meneely"
       banner "Make a word cloud of your publications."
       opt :min, "Minimum number of times a word must occur to be included", :default => 1
+      opt :use_ignores, "Use the built-in ignore listing?", :default => true
       opt :file, "The source file in plain text", :type => String
     end
 
