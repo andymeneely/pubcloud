@@ -2,6 +2,7 @@
 # Assume 1em in Firefox 21
 # See eg/font-calibration.html for how I got this
 rockwell:
+  height: 18.9
   a: 
     width: 9.3
   b: 

@@ -5,7 +5,12 @@ class TestFontSize < Test::Unit::TestCase
 
   def test_abc_rockwell
     font_size = FontSize.new('rockwell')
-    assert_equal(28.3, font_size.of('abc'))
+    assert_equal(28.3, font_size.width_of('abc'))
+  end
+
+  def test_abc_rockwell_height
+    font_size = FontSize.new('rockwell')
+    assert_equal(18.9, font_size.height)
   end
 
   def test_unsupported_font
