@@ -2,8 +2,9 @@ require 'yaml'
 
 class FontSize
 
-  def initialize(font=:rockwell)
-    @table = YAML.load_file('data/font_size.yml')['font']
+  def initialize(font)
+    @table = YAML.load_file('data/font_size.yml')[font.downcase]
+    raise UnsupportedFont if @table.nil?
   end
 
   def of(str)
@@ -14,4 +15,6 @@ class FontSize
     total
   end
 
+  class UnsupportedFont < RuntimeError
+  end
 end

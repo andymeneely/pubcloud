@@ -1,8 +1,7 @@
 # Font size table
 # Assume 1em in Firefox 21
 # See eg/font-calibration.html for how I got this
-font:
-  name: Rockwell
+rockwell:
   a: 
     width: 12.4
   b: 
