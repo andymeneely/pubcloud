@@ -45,8 +45,4 @@ class LayoutGrid
     end
   end
   
-  # Check out of bounds for placement
-  def out_of_bounds(grid_block,row,col)
-    
-  end  
 end
