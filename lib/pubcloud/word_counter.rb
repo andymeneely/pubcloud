@@ -18,15 +18,6 @@ class WordCounter
     @tokens ||= count_frequency(use_ignores)
     table = Hash.new
     @tokens.each { |token,flag| table[token.name] = token.count}
-
-    table.sort do |a,b|
-      if((a[1] <=> b[1]) == 0)
-        b[0] <=> a[0] # Sort by token length, if tied
-      else 
-        a[1] <=> b[1] # Sort by token count
-      end 
-    end
-
     table.keep_if{|token, count| count >= count_min}
   end
 
