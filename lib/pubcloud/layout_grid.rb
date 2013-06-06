@@ -1,6 +1,6 @@
 class LayoutGrid
   @@empty = "<td>&nbsp;</td>"
-
+  attr_reader :grid
 
   def initialize(width,height)
     @width=width
@@ -15,7 +15,7 @@ class LayoutGrid
   end
 
   def add!(grid_block,row,col)
-    iterate_grid_block(grid_block,row,col){|i,j| return :out_of_bounds if (i<0 || i>=@height || j<0 || j>=@width)}
+    iterate_grid_block(grid_block,row,col) {|i,j| return :out_of_bounds if (i<0 || i>=@height || j<0 || j>=@width)}
     iterate_grid_block(grid_block,row,col) {|i,j| return :collision if @grid[i][j].eql?(:taken)}
     iterate_grid_block(grid_block,row,col) {|i,j| @grid[i][j] = :taken} # overwritten by rowspan/colspan
     @grid[row][col] = grid_block
