@@ -1,6 +1,6 @@
 class LayoutGrid
   @@empty = "<td>&nbsp;</td>"
-  attr_reader :grid
+  attr_reader :grid,:width,:height
 
   def initialize(width,height)
     @width=width
