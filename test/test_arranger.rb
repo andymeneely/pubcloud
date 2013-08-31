@@ -18,12 +18,48 @@ class TestArranger < Test::Unit::TestCase
     assert_equal(1, arr.font_size('banana'))
   end
 
+  def test_lay_it_out_smoke
+    arr = Arranger.new({'apple'=> 10000}, @text_size, @max_font_em)
+    grid = LayoutGrid.new(10,10)
+    grid = arr.lay_it_out(grid)
+    # apple should just be right in the middle at 5,5
+    assert_equal('apple', grid.grid[5][5].token.to_s)
+  end
+
   def test_lay_it_out
     arr = Arranger.new(@freq, @text_size, @max_font_em)
     grid = LayoutGrid.new(10,10)
-    arr.lay_it_out(grid)
+    grid = arr.lay_it_out(grid)
+    # Expected looks like this:
+    #    
+    #    0 1 2 3 4 5 6 7 8 9
+    #   ---------------------
+    # 0 | | | | | | | | | | |
+    #   ---------------------
+    # 1 | | | | | | | | | | |
+    #   ---------------------
+    # 2 | | | | | | | | | | |
+    #   ---------------------
+    # 3 | | | | | | | | | | |
+    #   ---------------------
+    # 4 | | | | | | |pear | |
+    #   ---------------------
+    # 5 | | | | | |apple| | |
+    #   ---------------------
+    # 6 | | | | |banana | | |
+    #   ---------------------
+    # 7 | | | | | | | | | | |
+    #   ---------------------
+    # 8 | | | | | | | | | | |
+    #   ---------------------
+    # 9 | | | | | | | | | | |
+    #   ---------------------
+    
     puts grid.to_html
-    assert_equal(1,2,"this test isn't done!")
+    assert_equal('apple',grid.grid[5][5].token.to_s)
+    assert_equal('pear',grid.grid[4][6].token.to_s)
+    assert_equal('banana',grid.grid[6][4].token.to_s)
+
   end
 
 end

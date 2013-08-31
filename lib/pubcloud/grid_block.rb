@@ -1,6 +1,7 @@
 require 'pubcloud/token'
 
 class GridBlock
+  attr_reader :token 
 
   def initialize(token, font_size)
     @token = token
