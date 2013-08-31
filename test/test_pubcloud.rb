@@ -16,6 +16,7 @@ class TestPubcloud < Test::Unit::TestCase
     assert_equal(exp, Pubcloud::Pubcloud.new(opts).freqs.to_s)
   end
 
+  # Commented out because the output was intermediate anyway. But I do want a test like this at some point.
   #def test_cli
   #  exp =  '{"nation"=>5, "dedicated"=>6, "living"=>3, "dead"=>3, "person"=>3}' << "\n"
   #  actual = `./bin/pubcloud --file=test/data/gettysburg.txt --min=3 --use-ignores=true`
