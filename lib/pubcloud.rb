@@ -30,7 +30,7 @@ module Pubcloud
     Trollop::die :file, "must exist" unless File.exist?(opts[:file])
 
     pc = Pubcloud.new(opts)
-    puts pc.freqs
+    puts pc.freqs.sort{|a,b| a[1] <=> b[1]}
   end
 
 end
