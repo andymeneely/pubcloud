@@ -19,9 +19,9 @@ class Arranger
     table.each do |t|
       #TODO Only supports square layouts!
       SpiralIterator.new(g.width, {:row => g.width/2,:col => g.width/2}).each do |row, col |
-        puts "Attempting to put #{t.inspect} at #{row},#{col}"
         ret = g.add!(GridBlock.new(Token.new(t[0]), 1.0), row, col)
-        puts "\tResult? #{ret}"
+        puts "Attempting to put #{t.inspect} at #{row},#{col}... result: #{ret}"
+
         break if ret == :ok
       end
     end
