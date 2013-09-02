@@ -1,4 +1,5 @@
 require 'pubcloud/spiral_iterator'
+require 'pubcloud/grid_block'
 
 class Arranger
 

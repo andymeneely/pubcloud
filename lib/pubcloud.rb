@@ -1,5 +1,8 @@
 require 'pubcloud/word_counter'
 require 'pubcloud/version'
+require 'pubcloud/text_size'
+require 'pubcloud/arranger'
+require 'pubcloud/layout_grid'
 require 'trollop'
 
 module Pubcloud
@@ -10,9 +13,14 @@ module Pubcloud
       @opts = opts
     end 
 
-    def freqs
-        file = File.open(@opts[:file]); text = file.read; file.close
-        WordCounter.new(text).frequencies(@opts[:min],@opts[:use_ignores])
+    def build
+      file = File.open(@opts[:file]); text = file.read; file.close
+      freqs = WordCounter.new(text).frequencies(@opts[:min],@opts[:use_ignores])
+      text_size = TextSize.new('rockwell')
+      max_font_em = 4
+      arr = Arranger.new(freqs, text_size, max_font_em)
+      grid = arr.lay_it_out(LayoutGrid.new(100,100))
+      puts grid.to_html
     end
   end
 
@@ -30,7 +38,7 @@ module Pubcloud
     Trollop::die :file, "must exist" unless File.exist?(opts[:file])
 
     pc = Pubcloud.new(opts)
-    puts pc.freqs.sort{|a,b| a[1] <=> b[1]}
+    pc.build
   end
 
 end
